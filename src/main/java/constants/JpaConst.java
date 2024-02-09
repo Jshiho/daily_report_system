@@ -4,7 +4,7 @@ package constants;
  * DB関連の項目地を定義するインターフェース
  * ※インターフェースに定義した変数はpublic static final修飾子がついているとみなされる
  */
-public interface JspConst {
+public interface JpaConst {
 
 	//persistence-unit名
 	String PERSISTENCE_UNIT_NAME = "daily_report_system";
@@ -27,7 +27,7 @@ public interface JspConst {
 
 	int ROLE_ADMIN = 1; //管理者権限on（管理者）
 	int ROLE_GENERAL = 0;//管理者権限off（一般）
-	int EMP_DEL_TRIE =1;//削除フラグon（削除済み)
+	int EMP_DEL_TRUE =1;//削除フラグon（削除済み)
 	int EMP_DEL_FALSE = 0;//削除フラグoff(現役）
 
 	//日報テーブル
@@ -37,9 +37,9 @@ public interface JspConst {
 	String REP_COL_EMP = "employee_id";//日報を作成し従業員のid
 	String REP_COL_REP_DATE = "report_date";//いつの日報かを示す字付
 	String REP_COL_TITLE = "title";//   日報のタイトル
-	String REP_COL_CONRENT = "content";//日報の内容
-	String REP_COL_CRESTE_AT ="created_at";//登録日時
-	String REP_COL_UPDATE_AT ="updated_at";//更新日時
+	String REP_COL_CONTENT = "content";//日報の内容
+	String REP_COL_CREATED_AT ="created_at";//登録日時
+	String REP_COL_UPDATED_AT ="updated_at";//更新日時
 
 	//Entity名
 	String ENTITY_EMP = "employee";//従業員
@@ -47,7 +47,7 @@ public interface JspConst {
 
 	//JPQL内パラメータ
 	String JPQL_PARM_CODE= "code";//社員番号
-	String JPQL_PARM_PASSWPRD="password";//パスワード
+	String JPQL_PARM_PASSWORD="password";//パスワード
 	String JPQL_PARM_EMPLOYEE ="employee";//従業員
 
 	//NamedQueryのnameとQuery
@@ -61,7 +61,7 @@ public interface JspConst {
 
 	//社員番号とハッシュ化済パスワードを条件に未削除の従業員を取得する
 	String Q_EMP_GET_BY_CODE_AND_PASS = ENTITY_EMP + ".getByCodeAndPass";
-	String Q_EMP_GET_BY_CODE_AND_PASS_DEF = "SELECT e FROM Employee AS e WHERE e.deleteFlag = 0 AND e.code =:" + JPQL_PARM_CODE + "AND e.password = :" + JPQL_PARM_PASSWPRD;
+	String Q_EMP_GET_BY_CODE_AND_PASS_DEF = "SELECT e FROM Employee AS e WHERE e.deleteFlag = 0 AND e.code =:" + JPQL_PARM_CODE + "AND e.password = :" + JPQL_PARM_PASSWORD;
 
 	//指定した社員番号を保持する従業員の件数を取得する
 	String Q_EMP_COUNT_REGISTERED_BY_CODE = ENTITY_EMP + ".countRegidteredByCode";

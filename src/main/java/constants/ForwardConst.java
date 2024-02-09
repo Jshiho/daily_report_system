@@ -16,7 +16,7 @@ public enum ForwardConst {
 
 
 	//command
-	CMD("commnd"),
+	CMD("command"),
 	CMD_NONE(""),
 	CMD_INDEX("index"),
 	CMD_SHOW("show"),
