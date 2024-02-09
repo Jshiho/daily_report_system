@@ -205,7 +205,7 @@ public class EmployeeService extends ServiceBase{
 	 * 社員番号とパスワードを条件に検索し、データが取得できるかどうかで認証結果を返却する
 	 * @param code 社員番号
 	 * @param plainPass パスワード
-	 * param pepper pepper 文字列
+	 * @param pepper pepper 文字列
 	 * @return 認証結果を返却する（成功：true 失敗：false)
 	 */
 
