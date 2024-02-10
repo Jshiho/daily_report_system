@@ -202,29 +202,29 @@ public class EmployeeAction extends ActionBase{
 						null,
 						AttributeConst.DEL_FLAG_FALESE.getIntegerValue());
 
-		  //アプリケーションスコープからpepper文字列を取得
+		//アプリケーションスコープからpepper文字列を取得
 		String pepper = getContextScope(PropertyConst.PEPPER);
 
 		//従業員情報更新
 		List<String>errors = service.update(ev, pepper);
 
 		if(errors.size() > 0) {
-			   //更新中にエラーが発生した場合
+			//更新中にエラーが発生した場合
 
-			   putRequestScope(AttributeConst.TOKEN,getTokenId());//CSRF対策用トークン
-			   putRequestScope(AttributeConst.EMPLOYEE,ev);//入力された従業員情報
-			   putRequestScope(AttributeConst.ERR,errors);//エラーのリスト
+			putRequestScope(AttributeConst.TOKEN,getTokenId());//CSRF対策用トークン
+			putRequestScope(AttributeConst.EMPLOYEE,ev);//入力された従業員情報
+			putRequestScope(AttributeConst.ERR,errors);//エラーのリスト
 
-			   //編集画面を再表示
-			   forward(ForwardConst.FW_EMP_EDIT);
+			//編集画面を再表示
+			forward(ForwardConst.FW_EMP_EDIT);
 		}else {
-			   //更新中にエラーがなかった場合
+			//更新中にエラーがなかった場合
 
-			   //セッションに更新完了のフラッシュメッセージを設定
-			   putSessionScope(AttributeConst.FLUSH,MessageConst.I_UPDATED.getMessage());
+			//セッションに更新完了のフラッシュメッセージを設定
+			putSessionScope(AttributeConst.FLUSH,MessageConst.I_UPDATED.getMessage());
 
-			   //一覧画面にリダイレクト
-			   redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+			//一覧画面にリダイレクト
+			redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
 		}
 
 
@@ -232,7 +232,27 @@ public class EmployeeAction extends ActionBase{
 			}
 		}
 
+		/**
+		 * 論理削除を行う
+		 * @throws ServletException
+		 * @throws IOException
+		 */
 
+		public void destroy() throws ServletException, IOException{
+
+			//CSRF対策　tokenのチェック
+			if(checkToken()) {
+				//idを条件に従業員データを論理削除する
+				service.destroy(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+				//セッションに削除完了のフラッシュメッセージを設定
+				putSessionScope(AttributeConst.FLUSH,MessageConst.I_DELETED.getMessage());
+
+				//一覧画面にリダイレクト
+				redirect(ForwardConst.ACT_EMP,ForwardConst.CMD_INDEX);
+
+			}
+		}
 		}
 
 
