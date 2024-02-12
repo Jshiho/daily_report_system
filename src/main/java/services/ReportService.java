@@ -79,7 +79,7 @@ public class ReportService extends ServiceBase{
 	 */
 
 
-	public ReportView findone(int id) {
+	public ReportView findOne(int id) {
 		return ReportConverter.toView(findOneInternal(id));
 	}
 
